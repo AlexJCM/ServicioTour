@@ -21,4 +21,10 @@ $router->post('/usuario/login', 'ControladorUsuario@inicioSesion');
 $router->post('/usuario/buscar/{external_id}', 'ControladorUsuario@buscarUsuario');
 $router->post('/usuario/registrar', 'ControladorUsuario@registrarUsuario');
 
-
+////EndPoints de SitioTuristico
+$router->get('/sitio/listar', 'ControladorSitioTuristico@listarSitios');
+$router->get('/sitio/buscar/{cadena}', 'ControladorSitioTuristico@buscarSitio');
+$router->get('/sitio/buscarDos/{search}', 'ControladorSitioTuristico@buscarSitioDos');
+$router->post('/sitio/eliminar/{external_id}', 'ControladorSitioTuristico@eliminarSitio');
+$router->post('/sitio/editar/{external_id}', 'ControladorSitioTuristico@modificarSitio');
+$router->post('/sitio/registrar', 'ControladorSitioTuristico@registrarSitio');
