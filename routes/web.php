@@ -37,3 +37,17 @@ $router->post('/visita/registrar', 'ControladorVisita@registrarVisita');//
 $router->post('/visita/editarLike/{idVisita}', 'ControladorVisita@editarLikeVisita');
 $router->post('/visita/editarFavorito/{idVisita}', 'ControladorVisita@editarFavoritoVisita');
 $router->get('/visita/listarFavoritos/{external_id}', 'ControladorVisita@listarFavoritosUsuario');
+
+//Test
+$router->get('/listarVisitasTwo','ControladorVisita@testPluck');
+$router->get('/listarVisitasThree','ControladorVisita@testPluck2');
+$router->get('/testMax','ControladorVisita@testMax');
+$router->get('/testJoin','ControladorVisita@testJoin');
+$router->get('/testConsultas','ControladorVisita@testConsultas');
+$router->get('/testGroupBy','ControladorVisita@testGroupBy');
+
+////EndPoints de Imagen
+$router->get('/imagen/listar','ControladorImagen@listarImagen');
+$router->post('/imagen/eliminar/{imagen_id}', 'ControladorImagen@eliminarImagen');
+$router->post('/imagen/registrar', 'ControladorImagen@guardarImagen');//
+$router->post('/imagen/modificar/{imagen_id}', 'ControladorImagen@modificarImagen');
