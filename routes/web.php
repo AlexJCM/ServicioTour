@@ -28,3 +28,12 @@ $router->get('/sitio/buscarDos/{search}', 'ControladorSitioTuristico@buscarSitio
 $router->post('/sitio/eliminar/{external_id}', 'ControladorSitioTuristico@eliminarSitio');
 $router->post('/sitio/editar/{external_id}', 'ControladorSitioTuristico@modificarSitio');
 $router->post('/sitio/registrar', 'ControladorSitioTuristico@registrarSitio');
+
+////EndPoints de Visita
+$router->get('/visita/listar','ControladorVisita@listarVisita');
+$router->get('/visita/listarVisitasUsuario/{external_id}','ControladorVisita@listarVisitaUsuario');
+$router->get('/visita/listarMasVisitados','ControladorVisita@listarSitiosMasVisitados');
+$router->post('/visita/registrar', 'ControladorVisita@registrarVisita');//
+$router->post('/visita/editarLike/{idVisita}', 'ControladorVisita@editarLikeVisita');
+$router->post('/visita/editarFavorito/{idVisita}', 'ControladorVisita@editarFavoritoVisita');
+$router->get('/visita/listarFavoritos/{external_id}', 'ControladorVisita@listarFavoritosUsuario');
