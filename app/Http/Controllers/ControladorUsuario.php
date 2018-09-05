@@ -147,5 +147,38 @@ class ControladorUsuario extends Controller {
           return response()->json(["mensaje" => "La data no tiene el formato deseado", "siglas" => "DNF"], 400);
         }
     }
+    /**
+     * Método que recibe como parámetro un correo y retorna un array con los datos del usuario 
+     * de ese correo
+     * @param Request $request recibe el correo como unico parametro
+     * @return type array
+     */
+    public function inicioSesionCorreo(Request $request) {
+        if ($request->isJson()) {//
+            try {
+                $data = $request->json()->all();
+                $usuario = Usuario::where('correo', $data['correo'])->first();
+                //get para toda la lista, first para el primero, last para obtener el ultimo
+                
+                if ($usuario){
+                    return response()->json(["nombre"=>$usuario->nombre,
+                        "external_id"=>$usuario->external_id,                        
+                        "token"=> base64_encode($usuario->external_id.'--'.$usuario->correo),//codifica el token                        
+                        "mensaje" => "Inicio de sesion con CORREO existosa","siglas"=>"OE"], 200);
+                    
+                }   else
+                    {
+                     return response()->json(["mensaje" => "No se encontraron datos en usuario","siglas"=>"NDE"], 203);
+                }             
+            } catch (\Exception $exc) {
+               
+                return response()->json(["mensaje" => "Faltan datos en inicioSesion","siglas"=>"NDE"], 400);
+            }
+       }    
+      else 
+            {
+          return response()->json(["mensaje" => "La data no tiene el formato deseado", "siglas" => "DNF"], 400);
+        }
+    }
    
 }
