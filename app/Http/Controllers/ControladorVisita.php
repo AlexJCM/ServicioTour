@@ -133,6 +133,23 @@ echo $libros[0]->name;
 
         return response()->json($data, 200);
     }
+ /**
+     * Método para listar sitios más visitados incluida su respectiva ruta de la imagen
+     * @return type array
+     */
+    public function listarSitiosMasVisitadosTest() {
+        //Obtiene el resultado contado y relacionando dos tablas
+        $lista = Visita::join('sitioTuristico', function ($join) {
+                            $join->on('visita.sitioTuristico_id', '=', 'sitioTuristico.sitioTuristico_id')
+                            ->where('visita.favorito', '<>', 1);
+                        })->selectRaw('sitioTuristico.nombre, imagen.ruta, visita.favorito, visita.me_gusta, visita.id_usuario, visita.sitioTuristico_id, count(*) as contador')
+                        ->join('imagen', 'sitioTuristico.sitioTuristico_id', '=', 'imagen.sitioTuristico_id')
+                        ->groupBy('sitioTuristico_id')
+                        ->orderBy('contador', 'desc')
+                        ->take(3)->get();
+
+        return response()->json($lista, 200);
+    }
 
     /**
      * Esta función permite guerdar una visita por parte del usuario automaticamente
